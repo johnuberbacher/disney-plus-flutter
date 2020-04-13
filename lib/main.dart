@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
-  }
+  } 
 }
 
 class MyHomePage extends StatefulWidget {
@@ -108,6 +108,24 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+  Container MarvelMovies(String imagePath) {
+    return Container(
+      width: 105.0,
+      margin: const EdgeInsets.only(right: 10.0,),
+      decoration: BoxDecoration(
+        borderRadius: new BorderRadius.only(
+          topLeft: const Radius.circular(5.0),
+          topRight: const Radius.circular(5.0),
+          bottomRight: const Radius.circular(5.0),
+          bottomLeft: const Radius.circular(5.0),
+        ),
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
 
   Color _colorFromHex(String hexColor) {
     final hexCode = hexColor.replaceAll('#', '');
@@ -164,9 +182,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    IntroFeed("assets/images/posters/1.jpg"),
-                    IntroFeed("assets/images/posters/2.jpg"),
-                    IntroFeed("assets/images/posters/3.jpg"),
+                    IntroFeed("assets/images/posters/starwars/1.jpg"),
+                    IntroFeed("assets/images/posters/marvel/2.jpg"),
+                    IntroFeed("assets/images/posters/marvel/3.jpg"),
                   ],
                 ),
               ),
@@ -198,24 +216,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    StarWarsMovies("assets/images/posters/1.jpg"),
-                    StarWarsMovies("assets/images/posters/2.jpg"),
-                    StarWarsMovies("assets/images/posters/3.jpg"),
-                    StarWarsMovies("assets/images/posters/4.jpg"),
-                    StarWarsMovies("assets/images/posters/5.jpg"),
-                    StarWarsMovies("assets/images/posters/6.jpg"),
-                    StarWarsMovies("assets/images/posters/7.jpg"),
-                    StarWarsMovies("assets/images/posters/8.jpg"),
-                    StarWarsMovies("assets/images/posters/9.jpg"),
-                    StarWarsMovies("assets/images/posters/10.jpg"),
-                    StarWarsMovies("assets/images/posters/12.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/1.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/2.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/3.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/4.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/5.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/6.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/7.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/8.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/9.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/10.jpg"),
+                    StarWarsMovies("assets/images/posters/starwars/11.jpg"),
                   ],
                 ),
               ),
               new Container(
-                margin: const EdgeInsets.only(left: 15.0,),
+                margin: const EdgeInsets.only(left: 15.0, top: 20.0,),
                 alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
-                child: Text("New to Disney+",
+                child: Text("Marvel Cinematic Universe",
                     style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
                 ),
               ),
@@ -226,25 +244,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    StarWarsMovies("assets/images/posters/1.jpg"),
-                    StarWarsMovies("assets/images/posters/2.jpg"),
-                    StarWarsMovies("assets/images/posters/3.jpg"),
-                    StarWarsMovies("assets/images/posters/4.jpg"),
-                    StarWarsMovies("assets/images/posters/5.jpg"),
-                    StarWarsMovies("assets/images/posters/6.jpg"),
-                    StarWarsMovies("assets/images/posters/7.jpg"),
-                    StarWarsMovies("assets/images/posters/8.jpg"),
-                    StarWarsMovies("assets/images/posters/9.jpg"),
-                    StarWarsMovies("assets/images/posters/10.jpg"),
-                    StarWarsMovies("assets/images/posters/12.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/1.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/2.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/3.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/4.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/5.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/6.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/7.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/8.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/9.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/10.jpg"),
+                    MarvelMovies("assets/images/posters/marvel/11.jpg"),
                   ],
-                ),
-              ),
-              new Container(
-                margin: const EdgeInsets.only(left: 15.0, top: 20.0,),
-                alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
-                child: Text("Marvel Cinematic Universe",
-                    style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
                 ),
               ),
             ],
