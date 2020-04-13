@@ -45,6 +45,7 @@ flutter:
     - assets/images/
     - assets/images/posters/marvel/
     - assets/images/posters/starwars/
+    - assets/images/posters/highlighted/
     - assets/images/categories/
   # To add assets to your application, add an assets section, like this:
   # assets:

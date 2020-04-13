@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
-  } 
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -45,7 +45,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  Container IntroFeed(String imagePath) {
+  // Highlighted Movies Widget
+  Container Highlighted(String imagePath) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.85,
       margin: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -63,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+  // Categories List Widget
   Container Categories(String imagePath) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.18,
@@ -90,10 +92,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+  // Star Wars Movies Widget
   Container StarWarsMovies(String imagePath) {
     return Container(
       width: 105.0,
-      margin: const EdgeInsets.only(right: 10.0,),
+      margin: const EdgeInsets.only(left: 15.0,),
       decoration: BoxDecoration(
         borderRadius: new BorderRadius.only(
           topLeft: const Radius.circular(5.0),
@@ -108,10 +111,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+  // Marvel Movies Widget
   Container MarvelMovies(String imagePath) {
     return Container(
       width: 105.0,
-      margin: const EdgeInsets.only(right: 10.0,),
+      margin: const EdgeInsets.only(left: 15.0,),
       decoration: BoxDecoration(
         borderRadius: new BorderRadius.only(
           topLeft: const Radius.circular(5.0),
@@ -176,15 +180,18 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
               new Container(
-                margin: const EdgeInsets.symmetric(vertical: 20.0),
+                margin: const EdgeInsets.only(bottom: 20.0, top: 1.0,),
                 padding: const EdgeInsets.symmetric(horizontal: 0.0),
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    IntroFeed("assets/images/posters/starwars/1.jpg"),
-                    IntroFeed("assets/images/posters/marvel/2.jpg"),
-                    IntroFeed("assets/images/posters/marvel/3.jpg"),
+                    Highlighted("assets/images/posters/highlighted/1.jpg"),
+                    Highlighted("assets/images/posters/highlighted/2.jpg"),
+                    Highlighted("assets/images/posters/highlighted/3.jpg"),
+                    Highlighted("assets/images/posters/highlighted/4.jpg"),
+                    Highlighted("assets/images/posters/highlighted/5.jpg"),
+                    Highlighted("assets/images/posters/highlighted/6.jpg"),
                   ],
                 ),
               ),
@@ -211,7 +218,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               new Container(
                 margin: const EdgeInsets.symmetric(vertical: 20.0),
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 height: 160.0,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
@@ -239,7 +245,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               new Container(
                 margin: const EdgeInsets.symmetric(vertical: 20.0),
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 height: 160.0,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
