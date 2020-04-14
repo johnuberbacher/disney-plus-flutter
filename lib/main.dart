@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  // Application Root
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: _colorFromHex("1a1d29"),
+      statusBarColor: _colorFromHex("2d3045"),
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -28,122 +26,166 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
+
+}
+// Highlighted Movies Widget
+Container Highlighted(String imagePath) {
+  return Container(
+    width: 350.0,
+    // width: MediaQuery.of(context).size.width * 0.85,
+    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+    decoration: BoxDecoration(
+      borderRadius: new BorderRadius.only(
+        topLeft: const Radius.circular(5.0),
+        topRight: const Radius.circular(5.0),
+        bottomRight: const Radius.circular(5.0),
+        bottomLeft: const Radius.circular(5.0),
+      ),
+      image: DecorationImage(
+        image: AssetImage(imagePath),
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
+}
+// Categories List Widget
+Container Categories(String imagePath) {
+  return Container(
+    width: 65.0,
+    //width: MediaQuery.of(context).size.width * 0.18,
+    margin: const EdgeInsets.symmetric(horizontal: 1.0),
+    decoration: BoxDecoration(
+      border: Border.all(
+          color: _colorFromHex("364365"),// set border color
+          width: 1.0),   // set border width
+      gradient: LinearGradient(
+        stops: [0.0, 1.0],
+        begin: FractionalOffset.topCenter,
+        end: FractionalOffset.bottomCenter,
+        colors: [_colorFromHex("071a47"), _colorFromHex("064a9c")],
+      ),
+      borderRadius: new BorderRadius.only(
+        topLeft: const Radius.circular(5.0),
+        topRight: const Radius.circular(5.0),
+        bottomRight: const Radius.circular(5.0),
+        bottomLeft: const Radius.circular(5.0),
+      ),
+      image: DecorationImage(
+        image: AssetImage(imagePath),
+        fit: BoxFit.contain,
+      ),
+    ),
+  );
+}
+// Star Wars Movies Widget
+Container StarWarsMovies(String imagePath) {
+  return Container(
+    width: 105.0,
+    margin: const EdgeInsets.only(left: 15.0,),
+    decoration: BoxDecoration(
+      borderRadius: new BorderRadius.only(
+        topLeft: const Radius.circular(5.0),
+        topRight: const Radius.circular(5.0),
+        bottomRight: const Radius.circular(5.0),
+        bottomLeft: const Radius.circular(5.0),
+      ),
+      image: DecorationImage(
+        image: AssetImage(imagePath),
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
+}
+// Marvel Movies Widget
+Container MarvelMovies(String imagePath) {
+  return Container(
+    width: 105.0,
+    margin: const EdgeInsets.only(left: 15.0,),
+    decoration: BoxDecoration(
+      borderRadius: new BorderRadius.only(
+        topLeft: const Radius.circular(5.0),
+        topRight: const Radius.circular(5.0),
+        bottomRight: const Radius.circular(5.0),
+        bottomLeft: const Radius.circular(5.0),
+      ),
+      image: DecorationImage(
+        image: AssetImage(imagePath),
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
+}
+
+
+Color _colorFromHex(String hexColor) {
+  final hexCode = hexColor.replaceAll('#', '');
+  return Color(int.parse('FF$hexCode', radix: 16));
 }
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  // Highlighted Movies Widget
-  Container Highlighted(String imagePath) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.85,
-      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-      decoration: BoxDecoration(
-        borderRadius: new BorderRadius.only(
-          topLeft: const Radius.circular(5.0),
-          topRight: const Radius.circular(5.0),
-          bottomRight: const Radius.circular(5.0),
-          bottomLeft: const Radius.circular(5.0),
-        ),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
+  int bottomSelectedIndex = 0;
+
+  List<BottomNavigationBarItem> buildBottomNavBarItems() {
+    return [
+      BottomNavigationBarItem(
+          icon: new Icon(Icons.home),
+          title: new Text('Home')
       ),
-    );
+      BottomNavigationBarItem(
+        icon: new Icon(Icons.search),
+        title: new Text('Search'),
+      ),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          title: Text('Profile')
+      )
+    ];
   }
-  // Categories List Widget
-  Container Categories(String imagePath) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.18,
-      margin: const EdgeInsets.symmetric(horizontal: 1.5),
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: _colorFromHex("364365"),// set border color
-            width: 1.0),   // set border width
-          gradient: LinearGradient(
-            stops: [0.0, 1.0],
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter,
-            colors: [_colorFromHex("071a47"), _colorFromHex("064a9c")],
-        ),
-        borderRadius: new BorderRadius.only(
-          topLeft: const Radius.circular(5.0),
-          topRight: const Radius.circular(5.0),
-          bottomRight: const Radius.circular(5.0),
-          bottomLeft: const Radius.circular(5.0),
-        ),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.contain,
-        ),
-      ),
-    );
-  }
-  // Star Wars Movies Widget
-  Container StarWarsMovies(String imagePath) {
-    return Container(
-      width: 105.0,
-      margin: const EdgeInsets.only(left: 15.0,),
-      decoration: BoxDecoration(
-        borderRadius: new BorderRadius.only(
-          topLeft: const Radius.circular(5.0),
-          topRight: const Radius.circular(5.0),
-          bottomRight: const Radius.circular(5.0),
-          bottomLeft: const Radius.circular(5.0),
-        ),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  }
-  // Marvel Movies Widget
-  Container MarvelMovies(String imagePath) {
-    return Container(
-      width: 105.0,
-      margin: const EdgeInsets.only(left: 15.0,),
-      decoration: BoxDecoration(
-        borderRadius: new BorderRadius.only(
-          topLeft: const Radius.circular(5.0),
-          topRight: const Radius.circular(5.0),
-          bottomRight: const Radius.circular(5.0),
-          bottomLeft: const Radius.circular(5.0),
-        ),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
-      ),
+
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  Widget buildPageView() {
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index) {
+        pageChanged(index);
+      },
+      children: <Widget>[
+        Red(),
+        Blue(),
+        Yellow(),
+      ],
     );
   }
 
-  Color _colorFromHex(String hexColor) {
-    final hexCode = hexColor.replaceAll('#', '');
-    return Color(int.parse('FF$hexCode', radix: 16));
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void pageChanged(int index) {
+    setState(() {
+      bottomSelectedIndex = index;
+    });
+  }
+
+  void bottomTapped(int index) {
+    setState(() {
+      bottomSelectedIndex = index;
+      pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: _colorFromHex("2d3045"),
       appBar: AppBar(
@@ -164,142 +206,216 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: Container(
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            stops: [0.0, 1.0],
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter,
-            colors: [_colorFromHex("2d3045"), _colorFromHex("1a1d29")]
-            ),
-        ),
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              new Container(
-                margin: const EdgeInsets.only(bottom: 20.0, top: 1.0,),
-                padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                height: MediaQuery.of(context).size.height * 0.25,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    Highlighted("assets/images/posters/highlighted/1.jpg"),
-                    Highlighted("assets/images/posters/highlighted/2.jpg"),
-                    Highlighted("assets/images/posters/highlighted/3.jpg"),
-                    Highlighted("assets/images/posters/highlighted/4.jpg"),
-                    Highlighted("assets/images/posters/highlighted/5.jpg"),
-                    Highlighted("assets/images/posters/highlighted/6.jpg"),
-                  ],
-                ),
-              ),
-              new Container(
-                height: MediaQuery.of(context).size.width * 0.15,
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Categories("assets/images/categories/disney.png"),
-                    Categories("assets/images/categories/pixar.png"),
-                    Categories("assets/images/categories/starwars.png"),
-                    Categories("assets/images/categories/marvel.png"),
-                    Categories("assets/images/categories/natgeo.png"),
-                  ],
-                ),
-              ),
-              new Container(
-                margin: const EdgeInsets.only(left: 15.0, top: 20.0,),
-                alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
-                child: Text("Recommended For You",
-                    style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
-                ),
-              ),
-              new Container(
-                margin: const EdgeInsets.symmetric(vertical: 20.0),
-                height: 160.0,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    StarWarsMovies("assets/images/posters/starwars/1.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/2.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/3.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/4.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/5.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/6.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/7.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/8.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/9.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/10.jpg"),
-                    StarWarsMovies("assets/images/posters/starwars/11.jpg"),
-                  ],
-                ),
-              ),
-              new Container(
-                margin: const EdgeInsets.only(left: 15.0, top: 20.0,),
-                alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
-                child: Text("Marvel Cinematic Universe",
-                    style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
-                ),
-              ),
-              new Container(
-                margin: const EdgeInsets.symmetric(vertical: 20.0),
-                height: 160.0,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    MarvelMovies("assets/images/posters/marvel/1.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/2.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/3.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/4.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/5.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/6.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/7.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/8.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/9.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/10.jpg"),
-                    MarvelMovies("assets/images/posters/marvel/11.jpg"),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+
+      body: buildPageView(),
       bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          backgroundColor: _colorFromHex("1a1d29"),
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon:Icon(
-                Icons.home,
-                color: Color.fromARGB(255, 255, 255, 255)),
-              title: new Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-                color: Color.fromARGB(255, 255, 255, 255)),
-              title: new Text('Search'),
-            ),
-            BottomNavigationBarItem(
-              icon:Icon(
-                Icons.file_download,
-                color: Color.fromARGB(255, 255, 255, 255)),
-              title: new Text('Downloads'),
-            ),
-            BottomNavigationBarItem(
-              icon:Icon(
-                Icons.verified_user,
-                color: Color.fromARGB(255, 255, 255, 255)),
-              title: new Text('Profile'),
-            ),
-          ]
-      )
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white.withOpacity(0.8),
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        backgroundColor: _colorFromHex("1a1d29"),
+        type: BottomNavigationBarType.fixed,
+        currentIndex: bottomSelectedIndex,
+        onTap: (index) {
+          bottomTapped(index);
+        },
+        items: buildBottomNavBarItems(),
+      ),
     );
   }
 }
 
+class Red extends StatefulWidget {
+  @override
+  _RedState createState() => _RedState();
+}
+
+class _RedState extends State<Red> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            stops: [0.0, 1.0],
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+            colors: [_colorFromHex("2d3045"), _colorFromHex("1a1d29")]
+        ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            new Container(
+              margin: const EdgeInsets.only(bottom: 20.0, top: 1.0,),
+              padding: const EdgeInsets.symmetric(horizontal: 0.0),
+              height: MediaQuery.of(context).size.height * 0.25,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Highlighted("assets/images/posters/highlighted/1.jpg"),
+                  Highlighted("assets/images/posters/highlighted/2.jpg"),
+                  Highlighted("assets/images/posters/highlighted/3.jpg"),
+                  Highlighted("assets/images/posters/highlighted/4.jpg"),
+                  Highlighted("assets/images/posters/highlighted/5.jpg"),
+                  Highlighted("assets/images/posters/highlighted/6.jpg"),
+                ],
+              ),
+            ),
+            new Container(
+              height: MediaQuery.of(context).size.width * 0.15,
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Categories("assets/images/categories/disney.png"),
+                  Categories("assets/images/categories/pixar.png"),
+                  Categories("assets/images/categories/starwars.png"),
+                  Categories("assets/images/categories/marvel.png"),
+                  Categories("assets/images/categories/natgeo.png"),
+                ],
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 15.0, top: 20.0,),
+              alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
+              child: Text("Recommended For You",
+                  style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.symmetric(vertical: 20.0),
+              height: 160.0,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  StarWarsMovies("assets/images/posters/starwars/1.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/2.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/3.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/4.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/5.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/6.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/7.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/8.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/9.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/10.jpg"),
+                  StarWarsMovies("assets/images/posters/starwars/11.jpg"),
+                ],
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 15.0,),
+              alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
+              child: Text("Marvel Cinematic Universe",
+                  style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.symmetric(vertical: 20.0),
+              height: 160.0,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  MarvelMovies("assets/images/posters/marvel/1.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/2.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/3.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/4.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/5.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/6.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/7.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/8.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/9.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/10.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/11.jpg"),
+                ],
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 15.0,),
+              alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
+              child: Text("Pixar Animation",
+                  style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.symmetric(vertical: 20.0),
+              height: 160.0,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  MarvelMovies("assets/images/posters/marvel/1.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/2.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/3.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/4.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/5.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/6.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/7.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/8.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/9.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/10.jpg"),
+                  MarvelMovies("assets/images/posters/marvel/11.jpg"),
+                ],
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 15.0,),
+              alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
+              child: Text("National Geographic",
+                  style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Blue extends StatefulWidget {
+  @override
+  _BlueState createState() => _BlueState();
+}
+
+class _BlueState extends State<Blue> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            stops: [0.0, 1.0],
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+            colors: [_colorFromHex("2d3045"), _colorFromHex("1a1d29")]
+        ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            new Container(
+              margin: const EdgeInsets.only(left: 15.0,),
+              alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
+              child: Text("National Geographic",
+                  style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Yellow extends StatefulWidget {
+  @override
+  _YellowState createState() => _YellowState();
+}
+
+class _YellowState extends State<Yellow> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.yellowAccent,
+    );
+  }
+}
