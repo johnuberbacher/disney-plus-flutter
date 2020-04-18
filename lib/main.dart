@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'profile.dart';
+import 'downloads.dart';
+import 'search.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,6 +10,10 @@ class MyApp extends StatelessWidget {
   // Application Root
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarColor: _colorFromHex("1a1d29"),
       statusBarColor: _colorFromHex("2d3045"),
@@ -74,6 +81,7 @@ Container Categories(String imagePath) {
         bottomRight: const Radius.circular(5.0),
         bottomLeft: const Radius.circular(5.0),
       ),
+
       image: DecorationImage(
         image: AssetImage(imagePath),
         fit: BoxFit.contain,
@@ -141,7 +149,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text('Search'),
       ),
       BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+        icon: new Icon(Icons.file_download),
+        title: new Text('Downloads'),
+      ),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle ),
           title: Text('Profile')
       )
     ];
@@ -159,9 +171,10 @@ class _MyHomePageState extends State<MyHomePage> {
         pageChanged(index);
       },
       children: <Widget>[
-        Red(),
-        Blue(),
-        Yellow(),
+        Home(),
+        Search(),
+        Downloads(),
+        Profile(),
       ],
     );
   }
@@ -206,11 +219,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-
       body: buildPageView(),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(0.8),
+        unselectedItemColor: Colors.white.withOpacity(0.5),
         showSelectedLabels: false,
         showUnselectedLabels: false,
         backgroundColor: _colorFromHex("1a1d29"),
@@ -225,12 +237,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class Red extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _RedState createState() => _RedState();
+  _HomeState createState() => _HomeState();
 }
 
-class _RedState extends State<Red> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -266,6 +278,7 @@ class _RedState extends State<Red> {
               height: MediaQuery.of(context).size.width * 0.15,
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Categories("assets/images/categories/disney.png"),
@@ -371,51 +384,3 @@ class _RedState extends State<Red> {
   }
 }
 
-class Blue extends StatefulWidget {
-  @override
-  _BlueState createState() => _BlueState();
-}
-
-class _BlueState extends State<Blue> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            stops: [0.0, 1.0],
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter,
-            colors: [_colorFromHex("2d3045"), _colorFromHex("1a1d29")]
-        ),
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            new Container(
-              margin: const EdgeInsets.only(left: 15.0,),
-              alignment: Alignment.centerLeft, // Align however you like (i.e .centerRight, centerLeft)
-              child: Text("National Geographic",
-                  style: TextStyle(color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold,)
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Yellow extends StatefulWidget {
-  @override
-  _YellowState createState() => _YellowState();
-}
-
-class _YellowState extends State<Yellow> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.yellowAccent,
-    );
-  }
-}
