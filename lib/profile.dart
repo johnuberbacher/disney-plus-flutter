@@ -23,6 +23,19 @@ Container profiles(String imagePath, String name) {
         fit: BoxFit.cover,
       ),
     ),
+    child: Row(
+      children: [
+        new Text(
+          name,
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight:
+            FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ],
+    ),
   );
 }
 
@@ -60,33 +73,59 @@ class _ProfileState extends State<Profile> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        profiles("assets/images/profiles/1.png","name"),
-                        profiles("assets/images/profiles/2.png","name"),
-                        profiles("assets/images/profiles/3.png","name"),
-                        profiles("assets/images/profiles/4.png","name"),
-                        profiles("assets/images/profiles/5.png","name"),
-                        profiles("assets/images/profiles/6.png","name"),
-                        profiles("assets/images/profiles/7.png","name"),
-                        profiles("assets/images/profiles/8.png","name"),
+                        profiles("assets/images/profiles/1.png","John"),
+                        profiles("assets/images/profiles/2.png","2"),
+                        profiles("assets/images/profiles/3.png","3"),
+                        profiles("assets/images/profiles/4.png","4"),
+                        profiles("assets/images/profiles/5.png","5"),
+                        profiles("assets/images/profiles/6.png","6"),
+                        profiles("assets/images/profiles/7.png","7"),
+                        profiles("assets/images/profiles/8.png","8"),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            new FlatButton(
-              color: Colors.blue,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueAccent,
-              onPressed: () {
-                /*...*/
-              },
-              child: Text(
-                "Edit Profiles",
-                style: TextStyle(fontSize: 18.0),
+            new Container(
+              child: FlatButton(
+                color: Colors.blue,
+                textColor: Colors.white,
+                disabledColor: Colors.grey,
+                disabledTextColor: Colors.black,
+                padding: EdgeInsets.all(8.0),
+                splashColor: Colors.blueAccent,
+                onPressed: () {
+                  /*...*/
+                },
+                child: Text(
+                  "Edit Profiles",
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(top: 20.0,),
+              alignment: Alignment.centerLeft,
+              child: ListView.separated(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                separatorBuilder: (context, index) => Divider(
+                  color: Colors.white.withOpacity(0.33),
+                ),
+                itemCount: 5,
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      "Index $index",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

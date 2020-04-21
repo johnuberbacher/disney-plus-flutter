@@ -29,6 +29,24 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+class DetailsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -43,7 +61,6 @@ class MyHomePage extends StatefulWidget {
 Container Highlighted(String imagePath) {
   return Container(
     width: 350.0,
-    // width: MediaQuery.of(context).size.width * 0.85,
     margin: const EdgeInsets.symmetric(horizontal: 5.0),
     decoration: BoxDecoration(
       borderRadius: new BorderRadius.only(
@@ -55,6 +72,25 @@ Container Highlighted(String imagePath) {
       image: DecorationImage(
         image: AssetImage(imagePath),
         fit: BoxFit.cover,
+      ),
+    ),
+    child: InkWell(
+      onTap: (){
+        print("Container clicked");
+      },
+      child: new Container(
+        child: new Material(
+          child: new InkWell(
+            onTap: (){
+              print("tapped");
+            },
+            child: new Container(
+              width: 100.0,
+              height: 100.0,
+            ),
+          ),
+          color: Colors.transparent,
+        ),
       ),
     ),
   );
